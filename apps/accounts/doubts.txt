@@ -1,0 +1,8 @@
+How to call the View in python shell an see the response of it?
+I have a project and Im doing its revrse engg., I want to see when the methods of the class are called,
+print the variables used in it.
+
+the code is here   https://dpaste.org/Yj8f
+
+I want to check when def check_registered() called and print user_id
+

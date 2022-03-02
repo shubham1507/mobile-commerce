@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>Email Tabmplate</title>
+  <style>
+    .email_table {
+      color: #333;
+      font-family: sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      text-align: center;
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 99%;
+      margin: 6px auto;
+      box-shadow: none;
+    }
+
+    table {
+      color: #333;
+      font-family: sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      text-align: center;
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 99%;
+      margin: 50px auto;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .16);
+    }
+
+    th {
+      font-weight: bold;
+      padding: 10px;
+      border-bottom: 2px solid #000;
+    }
+
+    tbody td {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+    }
+
+
+
+    .email_main_div {
+      width: 90%;
+      margin: auto;
+      background-color: #EEEEEE;
+      min-height: 500px;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    .item_table {
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="email_main_div">
+    <table class="email_table">
+      <tr style="box-shadow: 0px 10px 5px lightgrey;">
+        <td width="33.33%" style="text-align:left; padding:10px;">
+          <img src="http://turtlebeans-api.tersesoft.com/media/logo/logo.png" width="100" height="100px" />
+        </td>
+        <td style="text-align:center; padding:10px;">
+          <h2>Turtlebeans Coffee</h2>(New Order)
+        </td>
+        <td style="text-align:right; padding:10px;">
+          <br /> TurtleBeans,
+          <br /> PO Box 3055 St. Pauls NSW 2031, AUS
+          <br /> ABN: 16 956 578 183
+          <br /> Tel: +614328238523
+          <br /> Email: marc@turtlebeans.com
+          <br />
+        </td>
+      </tr>
+    </table>
+
+    <table class="email_table" style="margin-top:14px;">
+      <tr style="box-shadow: 0px 10px 5px lightgrey;">
+        <td width="350px;" style="text-align:left; padding:10px;">
+          <strong>Shipping Address :</strong>
+          <br /> INVOICE ID : {{invoice_no}}
+          <br /> Date of Invoice: {{date_of_invoice}}
+          <br /> INVOICE TO:
+          <br /> {{buyer_name}}
+          <br /> {{address}}, {{city}}
+          <br /> {{state}}, {{country}} - {{postcode}}
+          <br /> Email: {{buyer_email}}
+          <br /> Contact No. : {{contact_no}}
+          <br />
+        </td>
+      </tr>
+    </table>
+
+    <table class="item_table">
+      <thead>
+        <tr>
+          <th>Order No.</th>
+          <th>Item Name</th>
+          <th>Grind</th>
+          <th>Weight</th>
+          <th>Quantity</th>
+          <!-- <th>Price</th> -->
+        </tr>
+      </thead>
+      <tbody style="box-shadow: 0px 10px 5px lightgrey;">
+          {% for order in orders %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{order.coffee_name}}
+              <td>{{order.grind}}</td>
+              <td>{{order.weight}}</td>
+              <td>{{order.qty}}</td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    <!-- <div style="width:98%; padding:1%; margin-top:10px; font-size:15px; text-align:center;">
+      Company Pvt. Ltd. - Company Address - Company NO:08676628 | Vat No: 180988973
+    </div> -->
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>TurtleBeans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.0, minimum-scale=0.0, maximum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+</head>
+
+
+<body style="background:#e9e6e6;width:100%;font-family:Catamaran;">
+    {% block content %}
+    <br />
+    <div style="padding:30px;background:#fff;width:90%;margin:5% 2.5%;text-align:center;border-radius:5px">
+        <img alt="Turtlebeans Coffee" src="http://turtlebeans-api.tersesoft.com/media/logo/logo.png" style="border: 0; height: auto; max-width: 100%; vertical-align: middle; ;"
+            width="102">
+        <h3>Welcome to TURTLEBEANS</h3>
+        <p>New seller is added. Please find the following informations of seller.</p>
+        <br /> First Name : {{first_name}}
+        <br /> Last Name : {{last_name}}
+        <br /> Email : {{email}}
+        <br /> Company Country : {{company_country_name}}
+        <br /> Company Name : {{company_name}}
+        <br /> Bussiness Registration Number : {{business_registration_number}}
+        <br /> Phone Number : {{phone_number}}
+    </div>
+    <br />
+    {% endblock %}
+</body>
+
+</html>

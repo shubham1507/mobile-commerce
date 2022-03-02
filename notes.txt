@@ -1,0 +1,11 @@
+Called a seriealizer in shell
+
+
+In [10]: queryset = EmailUser.objects.all()
+
+In [13]: serializer = EmailUserSerializer(queryset, many=True)                                      
+
+In [14]: serializer.data                                                                            
+Out[14]: [OrderedDict([('first_name', 'Shubham'), ('last_name', 'Joshi'), ('email', 'shubam@tersesoft.com'), ('is_buyer', False), ('is_seller', False), ('image', None)]), OrderedDict([('first_name', 'jon'), ('last_name', 'Doe'), ('email', 'jon@tersesoft.com'), ('is_buyer', False), ('is_seller', False), ('image', '/media/UserImages/me.jpg')]), OrderedDict([('first_name', ''), ('last_name', ''), ('email', 'shubham@tersesoft.com'), ('is_buyer', False), ('is_seller', False), ('image', None)])]
+
+In [15]:   

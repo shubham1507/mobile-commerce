@@ -1,0 +1,9 @@
+{{template_title}}
+
+{{user}}
+
+{{email}}
+
+{{title}}
+
+{{description}}

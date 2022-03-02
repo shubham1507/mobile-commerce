@@ -1,0 +1,6 @@
+Hello {{ email }},
+
+Welcome to TURTLEBEANS and thanks for signing up. We hope to make all your future dealings with us pleasant and convenient.
+
+Thank you,
+Turtlebeans Team.

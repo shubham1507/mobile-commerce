@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <script> function myFunction() { window.open("turtlebeans://turtlebeans.com"); } </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Confirmed, you’re on the TurtleBeans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.0, minimum-scale=0.0, maximum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+</head>
+
+
+<body onload="myFunction()" style="background:#e9e6e6;width:100%;font-family:Catamaran;">
+    {% block content %}
+    <br />
+    <div style="padding:30px;background:#fff;width:90%;margin:5% 2.5%;text-align:center;border-radius:5px">
+        <img alt="Turtlebeans Coffee" src="http://turtlebeans-api.tersesoft.com/media/logo/logo.png" style="border: 0; height: auto; max-width: 100%; vertical-align: middle; ;"
+            width="102">
+        <h3>Welcome to TURTLEBEANS</h3>
+        <p>Your account is now validated!</p>
+
+        <button style="background:rgb(17, 143, 185);padding:15px;border-radius:9px">
+            <a style="text-decoration:none;color:white" href="turtlebeans://turtlebeans.com" style="padding:10px">Open App</a>
+        </button>
+    </div>
+    <br />
+    {% endblock %}
+</body>
+
+</html>
