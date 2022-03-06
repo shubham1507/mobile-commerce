@@ -10,10 +10,10 @@ class Notifications(models.Model):
         ('message', 'Message'),
         ('rate_review', 'Rate Review')
     )
-    user = models.ForeignKey('accounts.EmailUser',
+    user = models.ForeignKey('accounts.EmailUser', on_delete=models.CASCADE,
                              blank=True,
                              null=True)
-    Notification_image = models.ForeignKey('NotificationsImages',
+    Notification_image = models.ForeignKey('NotificationsImages', on_delete=models.CASCADE,
                                             blank=True,
                                             null=True)
     title = models.CharField(max_length=20,

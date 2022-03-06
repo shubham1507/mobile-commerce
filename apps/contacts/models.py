@@ -4,11 +4,11 @@ from django.db import models
 class Message(models.Model):
     sent_from = models.ForeignKey('accounts.EmailUser',
                                   related_name='sent_from',
-                                  blank=True,
+                                  blank=True,on_delete=models.CASCADE,
                                   null=True)
     received_to = models.ForeignKey('accounts.EmailUser',
                                     related_name='received_to',
-                                    blank=True,
+                                    blank=True,on_delete=models.CASCADE,
                                     null=True)
     subject = models.TextField(blank=True, null=True)
     message = models.TextField(blank=True, null=True)
@@ -19,7 +19,7 @@ class Message(models.Model):
 
 class Reminder(models.Model):
     buyer = models.ForeignKey('accounts.EmailUser',
-                              blank=True,
+                              blank=True,on_delete=models.CASCADE,
                               null=True)
     reminder_message = models.TextField(blank=True, null=True)
     reminder_time = models.DateField    (blank=True, null=True)
@@ -41,7 +41,7 @@ class TermsConditions(models.Model):
 
 class ContactUs(models.Model):
     user = models.ForeignKey('accounts.EmailUser',
-                             blank=True,
+                             blank=True,on_delete=models.CASCADE,
                              null=True)
     subject = models.CharField(max_length=300,
                             blank=True,
@@ -55,7 +55,7 @@ class ContactUs(models.Model):
 
 class ReportBug(models.Model):
     user = models.ForeignKey('accounts.EmailUser',
-                             blank=True,
+                             blank=True,on_delete=models.CASCADE,
                              null=True)
     subject = models.CharField(max_length=300,
                             blank=True,

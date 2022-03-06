@@ -2,6 +2,7 @@ from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from django.utils.translation import ugettext_lazy as _
+
 from apps.accounts.models import EmailUser
 
 
@@ -11,7 +12,7 @@ class CoffeeImages(models.Model):
                                 format='JPEG',
                                 options={'quality': 60},
                                 null=True)
-    coffee = models.ForeignKey('Coffee', blank=True, null=True)
+    coffee = models.ForeignKey('Coffee', blank=True, null=True, on_delete=models.CASCADE)
     order = models.IntegerField(null=True)
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -25,8 +26,8 @@ class CoffeeImages(models.Model):
 class CoffeeWeight(models.Model):
     weight = models.FloatField(blank=True, null=True)
     weight_in_lb = models.FloatField(blank=True, null=True)
-    country = models.ForeignKey('accounts.Country', blank=True, null=True)
-    group = models.ForeignKey('accounts.GroupCountry', blank=True, null=True)
+    country = models.ForeignKey('accounts.Country',  on_delete=models.CASCADE,blank=True, null=True)
+    group = models.ForeignKey('accounts.GroupCountry',  on_delete=models.CASCADE,blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -59,8 +60,8 @@ class CoffeeGrindTypes(models.Model):
 
 
 class PriceWithSize(models.Model):
-    coffee = models.ForeignKey('Coffee', blank=True, null=True)
-    weight = models.ForeignKey('CoffeeWeight', blank=True, null=True)
+    coffee = models.ForeignKey('Coffee',  on_delete=models.CASCADE,blank=True, null=True)
+    weight = models.ForeignKey('CoffeeWeight', on_delete=models.CASCADE, blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
     shipping_charge = models.FloatField(blank=True, null=True)
     inter_shipping_charge = models.FloatField(blank=True, null=True)
@@ -68,13 +69,13 @@ class PriceWithSize(models.Model):
 
 
 class CoffeeSelectedGrindTypes(models.Model):
-    coffee = models.ForeignKey('Coffee', blank=True, null=True)
-    grind = models.ForeignKey('CoffeeGrindTypes', blank=True, null=True)
+    coffee = models.ForeignKey('Coffee',  on_delete=models.CASCADE,blank=True, null=True)
+    grind = models.ForeignKey('CoffeeGrindTypes', on_delete=models.CASCADE, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
 class Coffee(models.Model):
-    excerpt = models.TextField(_('Excerpt'), blank=True, null=True)
+    excerpt = models.TextField()
     description = models.TextField(_('Description'), blank=True, null=True)
     discount_price = models.FloatField(_('Discount Price'),
                                        blank=True,
@@ -84,9 +85,9 @@ class Coffee(models.Model):
                                     null=True)
     name = models.CharField(_('Name'), max_length=300, blank=True, null=True)
     price = models.FloatField(_('Price'), blank=True, null=True)
-    weight = models.ForeignKey('CoffeeWeight', blank=True, null=True)
-    qty = models.ForeignKey('CoffeeQTY', blank=True, null=True)
-    grind = models.ForeignKey('CoffeeGrindTypes', blank=True, null=True)
+    weight = models.ForeignKey('CoffeeWeight', blank=True, null=True, on_delete=models.CASCADE,)
+    qty = models.ForeignKey('CoffeeQTY', blank=True, null=True, on_delete=models.CASCADE)
+    grind = models.ForeignKey('CoffeeGrindTypes', blank=True, null=True, on_delete=models.CASCADE)
     coffee_from = models.CharField(_('Coffee From'),
                                    max_length=300,
                                    blank=True,
@@ -101,10 +102,10 @@ class Coffee(models.Model):
                                blank=True,
                                null=True)
     body = models.CharField(max_length=300, blank=True, null=True)
-    seller = models.ForeignKey('accounts.EmailUser', blank=True, null=True)
+    seller = models.ForeignKey('accounts.EmailUser',  on_delete=models.CASCADE,blank=True, null=True)
     is_sale = models.BooleanField(default=False)
     is_sold_out = models.BooleanField(default=False)
-    shipping_type = models.ForeignKey('orders.ShippingTypes',
+    shipping_type = models.ForeignKey('orders.ShippingTypes', on_delete=models.CASCADE,
                                       blank=True,
                                       null=True)
     inter_shipping_charge = models.FloatField(blank=True, null=True)
@@ -144,6 +145,6 @@ class CoffeeLogos(models.Model):
 
 
 class Favourite(models.Model):
-    buyer = models.ForeignKey('accounts.EmailUser', blank=True, null=True)
-    coffee = models.ForeignKey('Coffee', blank=True, null=True)
+    buyer = models.ForeignKey('accounts.EmailUser',  on_delete=models.CASCADE,blank=True, null=True)
+    coffee = models.ForeignKey('Coffee',  on_delete=models.CASCADE,blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)

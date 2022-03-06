@@ -57,7 +57,7 @@ class Country(models.Model):
 
 
 class BuyerAvailableCountry(models.Model):
-    country = models.ForeignKey('Country', null=True)
+    country = models.ForeignKey('Country', null=True,on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
@@ -126,15 +126,15 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
     birth_date = models.DateField(_("Date"), blank=True, null=True)
     country = models.ForeignKey('Country',
                                 related_name='country',
-                                blank=True,
+                                blank=True,on_delete=models.CASCADE,
                                 null=True)
-    state = models.ForeignKey('State', blank=True, null=True)
+    state = models.ForeignKey('State', blank=True, on_delete=models.CASCADE,null=True)
     city = models.ForeignKey('City',
                              blank=True,
                              null=True,
                              on_delete=models.SET_NULL)
     company_country = models.ForeignKey('Country',
-                                        related_name='company_country',
+                                        related_name='company_country',on_delete=models.CASCADE,
                                         blank=True,
                                         null=True)
     profile_description = models.TextField(blank=True, null=True)

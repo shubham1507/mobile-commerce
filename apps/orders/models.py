@@ -5,15 +5,15 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 class Cart(models.Model):
-    buyer = models.ForeignKey('accounts.EmailUser')
-    coffee = models.ForeignKey('coffee.Coffee')
-    weight = models.ForeignKey('coffee.CoffeeWeight', blank=True, null=True)
-    qty = models.ForeignKey('coffee.CoffeeQTY', blank=True, null=True)
+    buyer = models.ForeignKey('accounts.EmailUser', on_delete=models.CASCADE)
+    coffee = models.ForeignKey('coffee.Coffee', on_delete=models.CASCADE)
+    weight = models.ForeignKey('coffee.CoffeeWeight', blank=True, null=True, on_delete=models.CASCADE)
+    qty = models.ForeignKey('coffee.CoffeeQTY', blank=True, null=True, on_delete=models.CASCADE)
     price = models.CharField(_('Coffee Price'),
                              max_length=50,
                              blank=True,
                              null=True)
-    grind_type = models.ForeignKey('coffee.CoffeeGrindTypes',
+    grind_type = models.ForeignKey('coffee.CoffeeGrindTypes', on_delete=models.CASCADE,
                                    blank=True,
                                    null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -45,14 +45,14 @@ class ShippingTypes(models.Model):
 
 
 class Shipping(models.Model):
-    buyer = models.ForeignKey('accounts.EmailUser')
+    buyer = models.ForeignKey('accounts.EmailUser', on_delete=models.CASCADE)
     phone_number = models.CharField(_('Phone Number'),
                                     max_length=15,
                                     blank=True,
                                     null=True)
     address_line_1 = models.TextField(blank=True, null=True)
-    country = models.ForeignKey('accounts.Country', blank=True, null=True)
-    state = models.ForeignKey('accounts.State', blank=True, null=True)
+    country = models.ForeignKey('accounts.Country',  on_delete=models.CASCADE,blank=True, null=True)
+    state = models.ForeignKey('accounts.State',  on_delete=models.CASCADE,blank=True, null=True)
     city = models.ForeignKey('accounts.City',
                              blank=True,
                              null=True,
@@ -65,7 +65,7 @@ class Shipping(models.Model):
 
 
 class OrderPlacedMappig(models.Model):
-    user = models.ForeignKey('accounts.EmailUser', blank=True, null=True)
+    user = models.ForeignKey('accounts.EmailUser',  on_delete=models.CASCADE,blank=True, null=True)
     price = models.FloatField(max_length=50, blank=False, null=True)
     coupon_code = models.CharField(max_length=50, blank=True, null=True)
     coupon_discount_amount = models.FloatField(blank=True, null=True)
@@ -78,23 +78,23 @@ class OrderPlacedMappig(models.Model):
 
 
 class OrderPlaced(models.Model):
-    buyer = models.ForeignKey('accounts.EmailUser',
+    buyer = models.ForeignKey('accounts.EmailUser', on_delete=models.CASCADE,
                               related_name='buyer',
                               blank=True,
                               null=True)
-    seller = models.ForeignKey('accounts.EmailUser',
+    seller = models.ForeignKey('accounts.EmailUser', on_delete=models.CASCADE,
                                related_name='seller',
                                blank=True,
                                null=True)
-    coffee = models.ForeignKey('coffee.Coffee', blank=True, null=True)
-    order_placed_mapping = models.ForeignKey('OrderPlacedMappig',
+    coffee = models.ForeignKey('coffee.Coffee', on_delete=models.CASCADE, blank=True, null=True)
+    order_placed_mapping = models.ForeignKey('OrderPlacedMappig', on_delete=models.CASCADE,
                                              blank=True,
                                              null=True)
-    selected_grind = models.ForeignKey('coffee.CoffeeGrindTypes',
+    selected_grind = models.ForeignKey('coffee.CoffeeGrindTypes', on_delete=models.CASCADE,
                                        blank=True,
                                        null=True)
     braintree_translation_id = models.TextField(blank=True, null=True)
-    shipping = models.ForeignKey('Shipping', blank=True, null=True)
+    shipping = models.ForeignKey('Shipping',  on_delete=models.CASCADE,blank=True, null=True)
     weight = models.CharField(max_length=10, blank=True, null=True)
     qty = models.CharField(max_length=10, blank=True, null=True)
     price = models.FloatField(max_length=20, blank=True, null=True)
@@ -106,8 +106,8 @@ class OrderPlaced(models.Model):
 
 
 class RateReview(models.Model):
-    buyer = models.ForeignKey('accounts.EmailUser', blank=True, null=True)
-    coffee = models.ForeignKey('coffee.Coffee', blank=True, null=True)
+    buyer = models.ForeignKey('accounts.EmailUser',  on_delete=models.CASCADE,blank=True, null=True)
+    coffee = models.ForeignKey('coffee.Coffee',  on_delete=models.CASCADE,blank=True, null=True)
     rating = models.IntegerField(blank=True, null=True)
     title = models.CharField(max_length=300, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
